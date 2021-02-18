@@ -1,49 +1,14 @@
 #!/usr/bin/env node
+"use strict";
 
-const board = `
-   xxx
-   xx  x  x
- x      xxx
-   xx  x   x
- x  x xx
-   xxxx  xxx
- x    x x x xx
-    xxxx
-    x xx xxx
-    xxx x  xxx
-     xx xxx x
-   xxxx
-`;
+const board = require("./board");
 
 const encodeCell = ([x,y])=>Number(x)+","+Number(y) // Ensure "x,y" string.
 const decodeCell = xy => xy.split(",").map(n=>Number(n))
 
 const past = new Set();
 
-const rules = {//{{{
-    alive: {
-        "0": false,
-        "1": false,
-        "2": true,
-        "3": true,
-        "4": false,
-        "5": false,
-        "6": false,
-        "7": false,
-        "8": false,
-    },
-    dead: {
-        "0": false, // MANDATORY
-        "1": false,
-        "2": false,
-        "3": true,
-        "4": false,
-        "5": false,
-        "6": false,
-        "7": false,
-        "8": false,
-    },
-};//}}}
+const rules = require("./rules");
 
 function encodeRow(str, y) {//{{{
     const cells = [];
